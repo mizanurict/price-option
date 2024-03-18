@@ -1,6 +1,10 @@
+import { useState } from "react";
 import Link from "../Link/Link";
-
+import { RiMenuFill } from "react-icons/ri";
+import { IoCloseSharp } from "react-icons/io5";
 const Navbar = () => {
+    const [open, setOpen] = useState(false);
+
     const routes = [
         { id: 1, path: '/', name: 'Home' },
         { id: 2, path: '/about', name: 'About' },
@@ -10,8 +14,16 @@ const Navbar = () => {
     ];
 
     return (
-        <div>
-            <ul className="md:flex">
+        <div className="m-4">
+            <div className="text-xl md:hidden" onClick={ () => setOpen(!open) }>
+                {
+                    open===true ? <IoCloseSharp />:<RiMenuFill />
+                }
+            
+            </div>
+            <ul className={ `md:flex duration-1000 absolute md:static
+            ${open ?'top-12':'-top-80'}
+            bg-purple-200`}>
             {
                 routes.map(route=><Link key={route.id} route={route}></Link>)
            }
